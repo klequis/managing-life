@@ -1,95 +1,143 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import { promises as fs } from 'fs'
+// You likely need to pass in something like "isSubItem"
+// It get the headings right
 
-export default function Home() {
+// Also need to make decision on what properties subitems can have
+// Will they be the same as Items or limited?
+
+interface ItemHeader {
+  createdAt: string,
+  modifiedAt: string
+  completedAt: string | null
+  dueAt: string
+  title: string
+}
+
+
+
+interface Contact {
+  id: number
+  name: string
+  address?: string
+  phone?: [{
+    number: string
+    type: "mobile" | "office" | "home"
+  }]
+}
+
+const contact1: Contact = {
+  "id": 1000,
+  "name": "Sandy Smith",
+  "address": "1234 Burning Tree Rd, San Jose, CA",
+  phone: [{
+    number: "111-111-1111",
+    type: "mobile"
+  }]
+}
+
+interface Item {
+  header: ItemHeader
+  contacts?: Contact[]
+}
+
+const a: ItemHeader = {
+  createdAt: "hi",
+  modifiedAt: "hi",
+  completedAt: "hi",
+  dueAt: "hi",
+  title: "hi"
+}
+
+
+
+const b: Item = {
+  header: a,
+  
+}
+
+
+type Numeric = "numeric"
+
+function formatDate(date) {
+  let options = {
+    // weekday: "short",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric"
+  };
+  const d = new Date(date)
+  return new Intl.DateTimeFormat(undefined, options).format(d)
+}
+
+function RenderItem({item}) {
+  // console.log('item', item)
+  // console.log('contacts', item.contacts)
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <div>
+      <h2>{item.title}</h2>
+      <ul>
+
+        <li>Due: {formatDate(item.dueAt)}</li>
+        <li>Created: {formatDate(item.createdAt)}</li>
+        <li>Created: {formatDate(item.createdAt)}</li>
+        <li>Modified: {formatDate(item.modifiedAt)}</li>
+        <li>Completed {item.completedAt === "" ? "No" : "Yes"}</li>
+      </ul>
+      <h3>Contacts</h3>
+      {
+        item.contacts?.map(c => {
+          return (
+            <div>
+              <h4>{c.name}</h4>
+              <ul>
+                <li>Address: {c.address}</li>
+                <li>Mobile {c.mobile}</li>
+                <li>Office {c.office}</li>
+              </ul>
+            </div>
+          )
+        })
+      }
+      <h3>Notes</h3>
+      {
+        item.notes?.map(n => {
+          return (
+            <ul>
+              <li>Created: {formatDate(n.createdAt)}</li>
+              <li>Modified: {formatDate(n.modifiedAt)}</li>
+              <li>{n.content}</li>
+            </ul>
+          )
+        })
+      }
+      <h3>Sub-items</h3>
+      
+      {
+        item.subItems?.map(si => {
+          return <RenderItem item={si} />
+        })
+      }
+    </div>
+  )
+}
+
+export default async function Home() {
+  const file = await fs.readFile(process.cwd() + '/src/data/data.json', 'utf8')
+  const data = JSON.parse(file)
+  console.log('data', data)
+  return (
+    <main>
+      <h1>Items</h1>
+      <div>
+      {
+        data.map(i => {
+          return <RenderItem item={i} />
+          // console.log('i', i)
+        })
+      }
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </main >
   )
 }
