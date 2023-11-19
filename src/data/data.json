@@ -10,12 +10,24 @@
         "id": 1000,
         "name": "Sandy Smith",
         "address": "1234 Burning Tree Rd, San Jose, CA",
-        "mobile": "111-111-1111"
+        "phone": [
+          {
+            "number": "111-111-1111",
+            "type": "mobile"
+          }
+        ]
+        
       },
       {
         "id": 1001,
         "name": "Kim Kane",
-        "office": "222-222-2222"
+        "phone": [
+          {
+          "number": "222-222-2222",
+          "type": "office"
+          }
+        ]
+        
       }
     ],
     "notes": [
