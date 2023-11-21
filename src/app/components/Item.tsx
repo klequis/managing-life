@@ -1,6 +1,6 @@
 import { formatDate } from "@/lib/formatDate"
 import ItemHeader, { ItemHeaderType } from './ItemHeader'
-
+import Contact, { ContactType } from './Contact'
 
 
 interface subItemType {
@@ -10,19 +10,7 @@ interface subItemType {
 
 export interface ItemType {
   header: ItemHeaderType
-  contacts?: [
-    {
-      id: string
-      name: string
-      address: string
-      phone: [
-        {
-          number: string
-          type: "mobile" | "office"
-        }
-      ]
-    }
-  ]
+  contacts?: ContactType[]
   notes?: [
     {
       createdAt: string
@@ -31,16 +19,6 @@ export interface ItemType {
     }
   ]
   subItems?: subItemType[]
-}
-
-interface Phone {
-  number: string
-  type: "mobile" | "office"
-}
-
-function Phone({ number, type }: Phone) {
-  return `${number}, ${type}`
-
 }
 
 export default function Item({ item }: { item: ItemType }) {
@@ -59,19 +37,7 @@ export default function Item({ item }: { item: ItemType }) {
       <ItemHeader {...item.header} />
       <h3>Contacts</h3>
       {
-        item.contacts?.map(c => {
-          return (
-            <div>
-              <h4>{c.name}</h4>
-              <ul>
-                <li>Address: {c.address}</li>
-                {
-                  c.phone.map((p: Phone) => <Phone {...p} />)
-                }
-              </ul>
-            </div>
-          )
-        })
+        item.contacts?.map(c => <Contact {...c} />)
       }
       <h3>Notes</h3>
       {
