@@ -20,7 +20,7 @@
 
 
 export function formatDate(date: string): string {
-  console.log('date', date)
+  // console.log('date', date)
   let options = {
     // weekday: "short",
     year: "numeric",

@@ -35,36 +35,18 @@
     ],
     "notes": [
       {
-        "createdAt": "2023-11-17T00:00:04.004Z",
-        "modifiedAt": "2023-11-17T00:00:04.004Z",
-        "content": "Spoke with Sandy Smith who instructed me to reach out to Kim Kane in the finance department to clarify the amount that needs to be paid"
-      },
-      {
-        "createdAt": "2023-11-18T00:00:04.004Z",
-        "modifiedAt": "2023-11-17T00:00:04.004Z",
-        "content": "Kim Kane clarified that the amount to be paid is $5,271.45"
-      }
-    ],
-    "subItems": [
-      {
         "header": {
           "createdAt": "2023-11-17T00:00:04.004Z",
-          "modifiedAt": "2023-11-17T00:00:04.004Z",
-          "completedAt": "",
-          "dueAt": "2023-11-24T00:00:12.004Z",
-          "title": "Setup Account"
+          "modifiedAt": "2023-11-17T00:00:04.004Z"
         },
-        "content": "Must setup account to deliver payment"
+        "body": "Spoke with Sandy Smith who instructed me to reach out to Kim Kane in the finance department to clarify the amount that needs to be paid"
       },
       {
         "header": {
-          "createdAt": "2023-11-17T00:00:04.004Z",
-          "modifiedAt": "2023-11-17T00:00:04.004Z",
-          "completedAt": "",
-          "dueAt": "2023-11-24T00:00:12.004Z",
-          "title": "Transfer funds"
+          "createdAt": "2023-11-18T00:00:04.004Z",
+        "modifiedAt": "2023-11-17T00:00:04.004Z"
         },
-        "content": "Funds must be transferred from Lemon Bank to Lime Bank before payment."
+        "body": "Kim Kane clarified that the amount to be paid is $5,271.45"
       }
     ]
   }

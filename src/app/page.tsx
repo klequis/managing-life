@@ -2,9 +2,6 @@ import { promises as fs } from 'fs'
 import { ItemType } from './components/Item'
 import Item from './components/Item'
 
-// You likely need to pass in something like "isSubItem"
-// to get the headings right
-
 export default async function Home() {
   const file = await fs.readFile(process.cwd() + '/src/data/data.json', 'utf8')
   const data: ItemType[] = JSON.parse(file)

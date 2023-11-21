@@ -26,7 +26,6 @@ export default function Contact({
   address,
   phones
 }: ContactType) {
-  console.log('phones', phones)
 
   return (
     <div>
