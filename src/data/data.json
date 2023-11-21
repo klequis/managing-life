@@ -1,10 +1,13 @@
 [
   {
-    "createdAt": "2023-11-17T00:00:04.004Z",
-    "modifiedAt": "2023-11-17T00:00:04.004Z",
-    "completedAt": "",
-    "dueAt": "2023-11-24T00:00:12.004Z",
-    "title": "Pay Acme",
+    "header": {
+      "createdAt": "2023-11-17T00:00:04.004Z",
+      "modifiedAt": "2023-11-17T00:00:04.004Z",
+      "completedAt": "",
+      "dueAt": "2023-11-24T00:00:12.004Z",
+      "title": "Pay Acme"
+    },
+    
     "contacts": [
       {
         "id": 1000,
@@ -44,19 +47,23 @@
     ],
     "subItems": [
       {
-        "createdAt": "2023-11-17T00:00:04.004Z",
-        "modifiedAt": "2023-11-17T00:00:04.004Z",
-        "completedAt": "",
-        "dueAt": "2023-11-24T00:00:12.004Z",
-        "title": "Setup Account",
+        "header": {
+          "createdAt": "2023-11-17T00:00:04.004Z",
+          "modifiedAt": "2023-11-17T00:00:04.004Z",
+          "completedAt": "",
+          "dueAt": "2023-11-24T00:00:12.004Z",
+          "title": "Setup Account"
+        },
         "content": "Must setup account to deliver payment"
       },
       {
-        "createdAt": "2023-11-17T00:00:04.004Z",
-        "modifiedAt": "2023-11-17T00:00:04.004Z",
-        "completedAt": "",
-        "dueAt": "2023-11-24T00:00:12.004Z",
-        "title": "Transfer funds",
+        "header": {
+          "createdAt": "2023-11-17T00:00:04.004Z",
+          "modifiedAt": "2023-11-17T00:00:04.004Z",
+          "completedAt": "",
+          "dueAt": "2023-11-24T00:00:12.004Z",
+          "title": "Transfer funds"
+        },
         "content": "Funds must be transferred from Lemon Bank to Lime Bank before payment."
       }
     ]

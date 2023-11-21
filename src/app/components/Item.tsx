@@ -1,20 +1,15 @@
 import { formatDate } from "@/lib/formatDate"
+import ItemHeader, { ItemHeaderType } from './ItemHeader'
 
-interface subItem {
-  createdAt: string
-  modifiedAt: string
-  completedAt ?: string
-  dueAt?: string
-  title: string
+
+
+interface subItemType {
+  header: ItemHeaderType
   content: string
 }
 
 export interface ItemType {
-  createdAt: string
-  modifiedAt: string
-  completedAt?: string
-  dueAt?: string
-  title: string
+  header: ItemHeaderType
   contacts?: [
     {
       id: string
@@ -35,35 +30,33 @@ export interface ItemType {
       content: string
     }
   ]
-  subItems?: subItem[]
+  subItems?: subItemType[]
 }
 
-function Phone({number, type}: {number: string, type: "mobile | office"}) {
+interface Phone {
+  number: string
+  type: "mobile" | "office"
+}
+
+function Phone({ number, type }: Phone) {
   return `${number}, ${type}`
-  
+
 }
 
-function dueAtFormat(dte: string | undefined): string {
-  return dte === undefined ? "None" : formatDate(dte)
-}
-
-function completedFormat(dte: string | undefined): string {
-  return dte === undefined ? "No" : formatDate(dte)
-}
-
-export default function Item({item}: {item: ItemType}) {
-  // console.log('item', item)
+export default function Item({ item }: { item: ItemType }) {
+  console.log('item', item)
   // console.log('item', item.contacts)
   return (
     <div>
-      <h2>{item.title}</h2>
+      {/* <h2>{item.header.title}</h2>
       <ul>
         <li>Due: {dueAtFormat(item.dueAt)}</li>
         <li>Created: {formatDate(item.createdAt)}</li>
         <li>Created: {formatDate(item.createdAt)}</li>
         <li>Modified: {formatDate(item.modifiedAt)}</li>
         <li>Completed {completedFormat(item.completedAt)}</li>
-      </ul>
+      </ul> */}
+      <ItemHeader {...item.header} />
       <h3>Contacts</h3>
       {
         item.contacts?.map(c => {
@@ -73,10 +66,8 @@ export default function Item({item}: {item: ItemType}) {
               <ul>
                 <li>Address: {c.address}</li>
                 {
-                  c.phone.map(p => <Phone p />)
+                  c.phone.map((p: Phone) => <Phone {...p} />)
                 }
-                {/* <li>Mobile {c.phone } </li>
-                <li>Office {c.office}</li> */}
               </ul>
             </div>
           )
