@@ -14,6 +14,12 @@ function Phone({ number, type }: PhoneType) {
   return `${number}, ${type}`
 }
 
+const h4Style = {
+  marginBlockEnd: '0.3325em'
+
+  
+}
+
 export default function Contact({
   id,
   name,
@@ -24,7 +30,7 @@ export default function Contact({
 
   return (
     <div>
-      <h4>{name}</h4>
+      <h4 style={h4Style}>{name}</h4>
       {address !== '' ? <div>{address}</div> : ''}
       { phones !== undefined
         ? phones.map((p: PhoneType) => {
