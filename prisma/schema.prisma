@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Item {
+  id           Int       @id @default(autoincrement())
+  // id String @id @default(uuid())                 // can do this
+  title        String
+  notes        Note[]
+  contacts     Contact[]
+  due_at       DateTime?
+  completed_at DateTime?
+  created_at   DateTime  @default(now())
+  modified_at  DateTime  @updatedAt
+
+  @@map("items")
+}
+
+model Note {
+  id          Int      @id @default(autoincrement())
+  body        String
+  item        Item     @relation(fields: [item_id], references: [id])
+  item_id     Int // scalar field
+  created_at  DateTime @default(now())
+  modified_at DateTime @updatedAt
+
+  @@map("notes")
+}
+
+model Contact {
+  id          Int      @id @default(autoincrement())
+  name        String
+  phones      Phone[]
+  item        Item     @relation(fields: [item_id], references: [id])
+  item_id     Int
+  created_at  DateTime @default(now())
+  modified_at DateTime @updatedAt
+
+  @@map("contacts")
+}
+
+model Phone {
+  id         Int     @id @default(autoincrement())
+  phone      String
+  phone_type String
+  contact    Contact @relation(fields: [contact_id], references: [id])
+  contact_id Int
+
+  @@map("phones")
+}
